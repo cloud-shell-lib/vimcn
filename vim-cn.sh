@@ -1,6 +1,7 @@
 #!/bin/bash
 
 function upload(){
+	echo "> 正在上传: ${FILENAME}"
 	url=`curl -s -F "name=@${FILENAME}" https://img.vim-cn.com/ 2>&1`
 	printf "\033[32m${FILENAME}\033[0m 已上传至: \033[32m${url}\033[0m\n" && open $url
 }
