@@ -1,31 +1,41 @@
 #!/bin/bash
 
+COUNT=0
+
 function upload(){
 	echo "> 正在上传: ${FILENAME}"
 	url=`curl -s -F "name=@${FILENAME}" https://img.vim-cn.com/ 2>&1`
 	printf "\033[32m${FILENAME}\033[0m 已上传至: \033[32m${url}\033[0m\n" && open $url
 }
 
-function start(){
-	echo "> cd \"$1\""
-	cd "$1"
-	# 遍历每一个podspec文件
-	echo "> 开始上传..."
-	for FILENAME in *.{png,jpg,ico,gif,ico,svg,tiff,webp,pdf,mp3,mp4,zip}
+function check(){
+	echo "> cd \"$*\""
+	cd "$*"
+	for FILENAME in *
 	do
-		if [ -r "$FILENAME" ];then 
-	 		upload &
-	    fi 
+		if [ -d "$FILENAME" ]; then
+			check ${FILENAME}
+		elif [ -r "$FILENAME" ]; then
+			let COUNT++
+			upload &
+	  fi
 	done
-	wait
-	echo "> 全部上传完毕！"
+
 }
 
-while :
-do
-	read -p "请把存放图片的文件夹拖入这里: " FOLDER
-	if [ -r "${FOLDER}" ];then 
-		start ${FOLDER}
-		break
-	fi
-done
+
+function start(){
+	while :
+	do
+		read -p "请把存放图片的文件夹拖入这里: " FOLDER
+		if [ -r "${FOLDER}" ];then
+			echo "> 开始上传..."
+			check ${FOLDER}
+			wait
+			echo "> 全部${COUNT}个文件上传完毕！"
+			break
+		fi
+	done
+}
+
+start
