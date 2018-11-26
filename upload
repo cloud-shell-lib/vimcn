@@ -18,24 +18,24 @@ COUNT=0
 PARAM1=$1
 PARAM2=$2
 
-function upload(){
+
+function output() {
+	printf "> [\033[32m${FILENAME}\033[0m] 已上传至:\n\033[32m${URL}\033[0m\n"
+}
+
+function upload() {
 	echo "> 正在上传: ${FILENAME}"
-	url=`curl -s -F "name=@${FILENAME}" https://img.vim-cn.com/ 2>&1`
-	case $PARAM2 in
-		'-o'|'--open')
-		  printf "\033[32m${FILENAME}\033[0m 已上传至: \033[32m${url}\033[0m\n" && open $url
-		;;
-		*)
-		  printf "\033[32m${FILENAME}\033[0m 已上传至: \033[32m${url}\033[0m\n"
-		;;
+	URL=`curl -s -F "name=@${FILENAME}" https://img.vim-cn.com/ 2>&1`
+	case ${PARAM2} in
+		'-o'|'--open') output && open ${URL} ;;
+		*) output ;;
   esac
 }
 
-function check(){
+function check() {
 	for FILENAME in *
 	do
 		if [ -d "$FILENAME" ]; then
-			echo "> cd \"${FILENAME}\""
 			cd "${FILENAME}"
 			check ${FILENAME}
 		elif [ -r "$FILENAME" ]; then
@@ -47,8 +47,7 @@ function check(){
 				;;
 				*)
 				  # 否则就上传指定的文件
-					file=$1
-					if [ "${file##*.}"x = "${PARAM1}"x ];then
+					if [ "${FILENAME##*.}"x = "${PARAM1}"x ];then
 						let COUNT++
 						upload &
 					fi
@@ -58,11 +57,18 @@ function check(){
 	done
 }
 
-function start(){
-	echo "> 开始上传..."
-	check
-	wait
-	echo "> 全部${COUNT}个文件上传完毕！"
+function start() {
+	case $PARAM1 in
+		'-v'|'--version')
+			echo "2.0"
+		;;
+		*)
+			printf "\n> \033[34mSTART:\033[0m 开始上传......\n\n"
+			check
+			wait
+			printf "\n> \033[34mEND:\033[0m 检测到的\033[32m\033[1m${COUNT}\033[0m个文件已全部上传完毕！\n\n"
+		;;
+  esac
 }
 
 start

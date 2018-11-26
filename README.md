@@ -6,10 +6,16 @@
 打开终端，`cd` 到存放图片的文件夹，输入这行命令：
 
 ```bash
-curl -s https://raw.githubusercontent.com/xaoxuu/vim-cn.sh/master/upload_all.sh | sh
+curl -s https://raw.githubusercontent.com/xaoxuu/vim-cn.sh/v2/upload | sh
 ```
 
 然后就会开始上传所有图片，并打印出图片的URL。
 
-> 请不要上传一些奇奇怪怪的图片。
 
+也可以安装到本地，随时可以使用`upload`命令来上传图片。
+
+```bash
+curl -s https://raw.githubusercontent.com/xaoxuu/vim-cn.sh/v2/install | sh
+```
+
+> 请不要上传一些奇奇怪怪的图片。
