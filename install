@@ -1,17 +1,34 @@
 #!/bin/bash
 
+PARAM1_VERSION=$1
+PARAM2_OPTIONS=$2
+
 function on_fail() {
-	printf "\n> \033[31m操作失败！\033[0m\n"
-	printf "我们都有不顺利的时候。\n"
-	printf "\n按下任意键继续: "
+	PARAM1_VERSION=""
+	PARAM2_OPTIONS=""
+	printf "\n> \033[31m下载失败！\033[0m"
+	echo "按下任意键继续: "
 	read -n 1
 }
 
 function start() {
-	curl -o $HOME/Downloads/upload.sh 'https://raw.githubusercontent.com/xaoxuu/vim-cn.sh/v2/client' &&
+	case $PARAM1_VERSION in
+		'') PARAM1_VERSION='v2' ;;
+		*) ;;
+	esac
+	echo "> 正在从${PARAM1_VERSION}分支下载vim-ch.sh脚本..."
+	URL=https://raw.githubusercontent.com/xaoxuu/vim-cn.sh/${PARAM1_VERSION}/client
+	curl -f -o $HOME/Downloads/upload.sh ${URL} -# &&
 	chmod 777 $HOME/Downloads/upload.sh &&
 	printf "\n> 可能需要输入密码来安装脚本:\n" &&
-	sudo mv $HOME/Downloads/upload.sh '/usr/local/bin/upload' && upload _qwjk12i7ndvi8owe || on_fail
+	case $PARAM2_OPTIONS in
+		'noecho')
+			sudo mv $HOME/Downloads/upload.sh '/usr/local/bin/upload' && upload _qwjk12i7ndvi8owe
+		;;
+		*)
+			sudo mv $HOME/Downloads/upload.sh '/usr/local/bin/upload' && upload _qwjk12i7ndvi8owe || on_fail
+		;;
+	esac
 }
 
 start
