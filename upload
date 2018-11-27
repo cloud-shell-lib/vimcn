@@ -2,15 +2,15 @@
 #
 # 参数格式: upload [扩展名] [操作]
 # 扩展名:
-# png/jpg/jped/zip/mp4等等，可以传 -a/--all 代表所有格式
+# png、jpg、jped、zip、mp4等等，可以传 all 或者不传参数代表所有格式
 # 操作:
-# -o/--open: 在浏览器中打开链接
+# open: 上传完成后在浏览器中打开链接
 #
 # 常用命令示例:
-# upload           上传所有可上传的文件
-# upload -a        上传所有可上传的文件
-# upload -a -o     上传所有可上传的文件，并在浏览器中打开链接
-# upload png       上传所有png的文件
+# upload             上传所有可上传的文件
+# upload all         上传所有可上传的文件
+# upload all open    上传所有可上传的文件，并在浏览器中打开链接
+# upload png         上传所有png的文件
 
 # 文件个数
 COUNT=0
@@ -27,7 +27,7 @@ function upload() {
 	echo "> 正在上传: ${FILENAME}"
 	URL=`curl -s -F "name=@${FILENAME}" https://img.vim-cn.com/ 2>&1`
 	case ${PARAM2} in
-		'-o'|'--open') output && open ${URL} ;;
+		'open') output && open ${URL} ;;
 		*) output ;;
   esac
 }
@@ -40,8 +40,8 @@ function check() {
 			check ${FILENAME}
 		elif [ -r "$FILENAME" ]; then
 			case $PARAM1 in
-				''|'-a'|'--all')
-				  # 不传参数/传-a/--all都代表上传所有文件
+				''|'all')
+				  # 不传参数/传all都代表上传所有文件
 					let COUNT++
 					upload &
 				;;
@@ -59,9 +59,6 @@ function check() {
 
 function start() {
 	case $PARAM1 in
-		'-v'|'--version')
-			echo "2.0"
-		;;
 		*)
 			printf "\n> \033[34mSTART:\033[0m 开始上传......\n\n"
 			check
