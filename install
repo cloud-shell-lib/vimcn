@@ -1,0 +1,17 @@
+#!/bin/bash
+
+function on_fail() {
+	printf "\n> \033[31m操作失败！\033[0m\n"
+	printf "我们都有不顺利的时候。\n"
+	printf "\n按下任意键继续: "
+	read -n 1
+}
+
+function start() {
+	curl -o $HOME/Downloads/upload.sh 'https://raw.githubusercontent.com/xaoxuu/vim-cn.sh/v2/client' &&
+	chmod 777 $HOME/Downloads/upload.sh &&
+	printf "\n> 可能需要输入密码来安装脚本:\n" &&
+	sudo mv $HOME/Downloads/upload.sh '/usr/local/bin/upload' && upload _qwjk12i7ndvi8owe || on_fail
+}
+
+start
