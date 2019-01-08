@@ -1,12 +1,12 @@
 #!/bin/bash
 
-const_lib=https://raw.githubusercontent.com/xaoxuu/lib/v1
+const_lib=https://cdn.jsdelivr.net/gh/xaoxuu/shell-lib@1.1
 const_repo='vim-cn.sh'
 const_client='client'
 
 param1_version=$1
 case $param1_version in
-	'') param1_version='v2' ;;
+	'') param1_version='master' ;;
 	*) ;;
 esac
 

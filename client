@@ -7,6 +7,7 @@ case $* in
     open ${URL}
 	;;
 	*)
-		curl -s https://raw.githubusercontent.com/xaoxuu/vim-cn.sh/v2/upload | sh -s $*
+	  # 执行云端脚本
+		curl -s https://raw.githubusercontent.com/xaoxuu/vim-cn.sh/2.0/upload | sh -s $*
 	;;
 esac
