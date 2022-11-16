@@ -17,7 +17,7 @@ curl -s https://cdn.jsdelivr.net/gh/xaoxuu/vim-cn.sh@2.1/upload.sh | sh
 ## 下载安装
 
 ```bash
-curl -s https://xaoxuu.com/install | sh -s vim-cn.sh
+curl -s https://sh.xaox.cc/install | bash -s vim-cn.sh
 ```
 
 <br>
