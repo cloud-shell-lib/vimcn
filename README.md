@@ -1,5 +1,5 @@
 # vim-cn.sh
-一个上传图片到 [img.vim-cn.com](img.vim-cn.com) 的脚本。
+一个上传图片到 [img.vim-cn.com](https://img.vim-cn.com) 的脚本。
 
 ![](https://img.vim-cn.com/0d/e463788b9eb82f82b551d8da1cd4cbae9d64cb.png)
 
