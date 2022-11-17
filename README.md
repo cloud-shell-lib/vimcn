@@ -9,7 +9,7 @@
 打开终端，`cd` 到存放图片的文件夹，输入这行命令就开始上传图片：
 
 ```bash
-curl -s https://cdn.jsdelivr.net/gh/xaoxuu/vim-cn.sh@2.1/upload.sh | sh
+curl -s https://sh.xaox.cc/run/vimcn/main/upload.sh | sh
 ```
 
 > 为了简化指令，建议下载安装后使用。
@@ -17,7 +17,7 @@ curl -s https://cdn.jsdelivr.net/gh/xaoxuu/vim-cn.sh@2.1/upload.sh | sh
 ## 下载安装
 
 ```bash
-curl -s https://sh.xaox.cc/install | bash -s vim-cn.sh
+curl -s https://sh.xaox.cc/install | bash -s vimcn
 ```
 
 <br>
